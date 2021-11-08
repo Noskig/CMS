@@ -1,0 +1,10 @@
+﻿@using Umbraco.Cms.Web.Common.PublishedModels;
+@inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage<ContentModels.Games>
+@using ContentModels = Umbraco.Cms.Web.Common.PublishedModels;
+@{
+	Layout = null;
+}
+      	<title>Games</title>
+@await Html.PartialAsync("MainHeader")
+@await Html.PartialAsync("GamesBody")
+@await Html.PartialAsync("MainFooter")

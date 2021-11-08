@@ -1,0 +1,16 @@
+﻿@inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage<Umbraco.Cms.Core.Models.Blocks.BlockListItem>;
+@using ContentModels = Umbraco.Cms.Web.Common.PublishedModels;
+@{
+    var content = Model.Content;
+    var settings = Model.Settings;
+    var color = content.Value("picof");
+    var birthday = content.Value("sunspins");
+    DateTime realbirthday = (DateTime)birthday;
+    string BirthDate = realbirthday.ToShortDateString();
+    
+}
+<div class="col" style="background-color:@color;">
+<h1>@content.Value("titel")</h1>
+<h5>@content.Value("abouts")</h2>
+<h3>Born: @BirthDate</h3>
+</div>

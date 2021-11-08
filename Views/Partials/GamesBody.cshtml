@@ -1,0 +1,141 @@
+﻿@using Umbraco.Cms.Core.Models
+@inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage
+@{
+  var thumbnailOne = Model.Value<IPublishedContent>("thumbnailPicture");
+  var thumbnailTwo = Model.Value<IPublishedContent>("thumbnailPictureTwo");
+  var thumbnailThree = Model.Value<IPublishedContent>("thumbnailPictureThree");
+  var thumbnailFour = Model.Value<IPublishedContent>("thumbnailPictureFour");
+  
+  
+  var linkone = Model.Value<Link>("urlForGame");
+  var linktwo = Model.Value<Link>("urlForGameTwp");
+  var linkthree = Model.Value<Link>("urlForGameThree");
+    var linkfour = Model.Value<Link>("urlForGameFour");
+  
+  var color = Model.Value<string>("ColorPicker");
+  string overlaycolor = (string)color;
+  
+  var homeurl = Model.AncestorOrSelf(1).Url();
+}
+
+<style>
+.background-image {
+        position: Relative;
+        /*padding-top:60px;*/
+        top: 0;
+        bottom:0;
+        left:0;
+        z-index:1;
+        height:40vh;
+        opacity:0.8;
+        
+    }
+</style>
+
+<body class="d-flex flex-column h-100">
+
+    <!--Navbar-->
+<nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
+    <div class="container-fluid">
+      <a class="navbar-brand" href="@homeurl">@Model.Value("siteTitel")</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarCollapse">
+        <ul class="navbar-nav me-auto mb-2 mb-md-0">
+            @await Umbraco.RenderMacroAsync("navLinks")
+            @await Umbraco.RenderMacroAsync("MacroChild")
+        </ul>
+        <form class="d-flex pt-3">
+          <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+          <button class="btn btn-outline-success" type="submit">Search</button>
+        </form>
+      </div>
+    </div>
+  </nav>
+    <!--Body-->
+<main class="flex-shrink-0">
+        <div class="background-image" style="background-color: @overlaycolor;">
+@await Umbraco.RenderMacroAsync("ImageNTitel", new {mediaId="1d683ec2-f397-418f-b06b-e1f3dbb42d78", displayMessage=@Model.Value("pageTitel")})
+</div>
+  <div class="container pt-60">
+      <div class="row">
+          <div class="col text-center">
+          </div>
+      </div>
+    <div class="container">
+        <div class="row">
+            <div class="col-3">
+                <!-- The First card-->
+                <div class="card">
+                    @{    
+                            if (thumbnailOne != null)
+                            {
+                                <img src="@thumbnailOne.Url()" class="img-fluid" style="width:300px; height:225px;" alt="@thumbnailOne.Value("alt")" />
+                            }
+                        }
+                      <div class="card-body">
+                        <h5 class="card-title">@Model.Value("titleOne")</h5>
+                            <p class="card-text">@Model.Value("descriptionOne")</p>
+                            <p class="card-text"><small class="text-muted"><a href="@linkone.Url" style="text-decoration:none;" target="@linkone.Target"/>Check it out</a></small></p>
+                      </div>
+                    </div>
+            </div>
+            <div class="col-3">
+                <!-- The Second card-->
+                <div class="card">
+                    @{      if (thumbnailTwo != null)
+                            {
+                                <img src="@thumbnailTwo.Url()" class="img-fluid" style="width:300px; height:225px;" alt="@thumbnailTwo.Value("alt")" />
+                                
+                             
+                            }
+                        }
+                      <div class="card-body">
+                        <h5 class="card-title">@Model.Value("titleTwo")</h5>
+                            <p class="card-text">@Model.Value("descriptionTwo")</p>
+                            <p class="card-text"><small class="text-muted"><a href="@linktwo.Url" style="text-decoration:none;" target="@linktwo.Target"/>Check it out</a></small></p>
+                      </div>
+                    </div>
+            </div>
+            <div class="col-3">
+                <!-- The Third card-->
+                <div class="card">
+                    @{      if (thumbnailThree != null)
+                            {
+                                <img src="@thumbnailThree.Url()" class="img-fluid" style="width:300px; height:225px;" alt="@thumbnailThree.Value("alt")" />
+                            }
+                        }
+                      <div class="card-body">
+                        <h5 class="card-title">@Model.Value("titleThree")</h5>
+                            <p class="card-text">@Model.Value("descriptionThree")</p>
+                         <p class="card-text"><small class="text-muted"><a href="@linkthree.Url" style="text-decoration:none;" target="@linkthree.Target"/>Check it out</a></small></p>
+                      </div>
+                    </div>
+            </div>
+            <div class="col-3">
+                <!-- The Fourth card-->
+                <div class="card">
+                    @{      if (thumbnailFour != null)
+                            {
+                                <img src="@thumbnailFour.Url()" class="img-fluid"  style="width:300px; height:225px;" alt="@thumbnailFour.Value("alt")" />
+                            }
+                        }
+                      <div class="card-body">
+                        <h5 class="card-title">@Model.Value("titleFour")</h5>
+                            <p class="card-text">@Model.Value("descriptionFour")</p>
+                             <p class="card-text"><small class="text-muted"><a href="@linkfour.Url" style="text-decoration:none;" target="@linkfour.Target"/>Check it out</a></small></p>
+                      </div>
+                    </div>
+            </div>
+        <div class="row">
+            <div class="col-">
+                
+            </div>
+            <div class="col">
+            </div>
+        </div>
+    </div>
+  </div>
+</main>
+</body>

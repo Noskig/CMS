@@ -1,0 +1,60 @@
+﻿@inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage
+@{
+
+var homeurl = Model.AncestorOrSelf(1).Url();
+var color = Model.Value<string>("ColorPicker");
+string overlaycolor = (string)color;
+var message = Model.Value<string>("pageTitel");
+}
+<!--ladda till style sheet-->
+<style>
+.background-image {
+        position: Relative;
+        /*padding-top:60px;*/
+        top: 0;
+        bottom:0;
+        left:0;
+        z-index:1;
+        height:40vh;
+        opacity:0.8;
+        
+    }
+</style>
+
+<body class="d-flex flex-column h-100">
+<nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
+    <div class="container-fluid">
+      <a class="navbar-brand" href="@homeurl">@Model.Value("siteTitel")</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarCollapse">
+        <ul class="navbar-nav me-auto mb-2 mb-md-0">
+            @await Umbraco.RenderMacroAsync("navLinks")
+            @await Umbraco.RenderMacroAsync("MacroChild")
+        </ul>
+        <form class="d-flex pt-3">
+          <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+          <button class="btn btn-outline-success" type="submit">Search</button>
+        </form>
+      </div>
+    </div>
+  </nav>
+  
+<main class="flex-shrink-0">
+   
+<div class="background-image" style="background-color: @overlaycolor;">
+@await Umbraco.RenderMacroAsync("ImageNTitel", new {mediaId="1d683ec2-f397-418f-b06b-e1f3dbb42d78", displayMessage=@Model.Value("pageTitel")})
+</div>
+<div class="container text-center">
+    
+
+@Html.GetGridHtml(Model, "grid")
+<p class="text-center">@Model.Value("description")</p>
+
+</div>
+</div>
+</div>
+</div>
+</main>
+</body>
