@@ -31,10 +31,10 @@ var message = Model.Value<string>("pageTitel");
         <ul class="navbar-nav me-auto mb-2 mb-md-0">
             @await Umbraco.RenderMacroAsync("MacroChild")
         </ul>
-        <form class="d-flex pt-3">
-          <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-          <button class="btn btn-outline-success" type="submit">Search</button>
-        </form>
+        <!--<form class="d-flex pt-3">-->
+        <!--  <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">-->
+        <!--  <button class="btn btn-outline-success" type="submit">Search</button>-->
+        <!--</form>-->
       </div>
     </div>
   </nav>
@@ -47,7 +47,7 @@ var message = Model.Value<string>("pageTitel");
           <div class="col">
                   <h1 class="mt-5">@Model.Value("titel")</h1>
                         <p class="lead"> En litet projekt med Umbraco <p>
-                        <p>Lite smått och gott kan förekomma</p>
+                        <p>@Model.Value("textForPage")</p>
           </div>
       </div>
   </div>
